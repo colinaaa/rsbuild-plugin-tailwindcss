@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import { pathToFileURL } from 'node:url';
 import QuickLRU from '@alloc/quick-lru';
 import { compile } from '@tailwindcss/node';
 import { clearRequireCache } from '@tailwindcss/node/require-cache';
@@ -30,7 +29,7 @@ function getContextFromCache(options: CompilerOptions): CacheEntry | undefined {
 }
 
 function pathToImportString(pathStr: string): string {
-  return JSON.stringify(pathToFileURL(pathStr).toString());
+  return JSON.stringify(pathStr.replace(/\\/g, '/'));
 }
 
 async function createCompiler(options: CompilerOptions): Promise<CacheEntry> {

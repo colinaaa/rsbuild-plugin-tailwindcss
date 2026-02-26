@@ -52,7 +52,7 @@ export const pluginTailwindCSS = (
         new rspack.experiments.VirtualModulesPlugin({
           [VIRTUAL_GLOBAL_ID]: `\
 @layer theme, base, components, utilities;
-@import ${JSON.stringify(preflight)} layer(base);
+@import ${JSON.stringify(preflight).replace(/\\/g, '/')} layer(base);
 `,
           [VIRTUAL_UTILITIES_ID]: '',
         }),

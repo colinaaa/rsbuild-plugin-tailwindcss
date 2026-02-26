@@ -38,12 +38,14 @@ export default async function tailwindCSSLoader(
     this.addDependency(config);
   }
 
+  const normalizedFilePath = filePath.replace(/\\/g, '/');
+
   // Scan only the current source file for class candidates.
   const scanner = new Scanner({
     sources: [
       {
-        base: path.dirname(filePath),
-        pattern: path.basename(filePath),
+        base: path.posix.dirname(normalizedFilePath),
+        pattern: path.posix.basename(normalizedFilePath),
         negated: false,
       },
     ],
